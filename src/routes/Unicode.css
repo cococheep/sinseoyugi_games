@@ -1,8 +1,12 @@
-.display_text{
-    margin-top: 30vh;
+.unicode_chosung{
+    margin-top: 20vh;
     font-size: 8vw;
     text-align: center;
     display: block;
+}
+
+.unicode_title{
+    text-align: center;
 }
 
 .btn {

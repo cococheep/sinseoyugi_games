@@ -3,10 +3,38 @@ import "./Unicode.css";
 
 class Unicode extends React.Component{
     state = {
+        isListLoaded: false,
         isRight: false,
-        movieNum: 0,
-        movies: ["명량", "극한직업", "신과함께-죄와 벌", "국제시장", "어벤져스:엔드게임"],
+        idx: 0,
+        randomOrder : [0],
+        movies: ["Loading"],
     };
+
+    loadMovieList = (movieList) =>{
+        this.setState({
+            isListLoaded: true,
+            movies: movieList
+        });
+
+        this.makeRandomNum();
+    }
+
+    makeRandomNum = () => {
+        let order = [];
+        const len = this.props.list.length;
+        for(let i = 0; i < len; i++){
+            order[i] = i;
+        }
+
+        for(let i = 0; i < len; i++){
+            let randIndex = Math.floor(Math.random() * (len - i));
+            [order[len - i], order[randIndex]] = [order[randIndex], order[len - i]];
+        }
+
+        this.setState({
+            randomOrder: order
+        });
+    }
 
     convertToChosung = (str) => {
         const GA_KOR = 44032; // 0xAC00
@@ -29,8 +57,8 @@ class Unicode extends React.Component{
     }
 
     showQusetion = () => {
-        const {isRight, movieNum, movies} = this.state;
-        return isRight ? movies[movieNum] : this.convertToChosung(movies[movieNum]);
+        const {isRight, idx, movies, randomOrder} = this.state;
+        return isRight ? movies[randomOrder[idx]]: this.convertToChosung(movies[randomOrder[idx]]);
     }
 
     showAnswer = () => {
@@ -38,16 +66,29 @@ class Unicode extends React.Component{
     }
 
     showNext = () => {
-        if(this.state.movieNum === this.state.movies.length - 1) alert("The End");
+        if(this.state.idx === this.state.movies.length - 1) alert("The End");
         else{
-            this.setState({movieNum: this.state.movieNum + 1, isRight: false});
+            this.setState({
+                isRight: false,
+                idx: this.state.idx + 1, 
+            });
+        }
+    }
+
+    componentDidMount() {
+        if(!this.state.isListLoaded){
+            const list = this.props.list;
+            this.loadMovieList(list);    
         }
     }
 
     render (){
+        console.log(this.state.randomOrder);
+
         return(
             <div>
-                <p className = "display_text">{this.showQusetion()}</p>
+                <h1 className = "unicode_title">초성게임: 영화</h1>
+                <p className = "unicode_chosung">{this.showQusetion()}</p>
                 <div className = "btn">
                     <button className = "answer_btn" onClick = {this.showAnswer}>Answer</button>
                     <button className = "next_btn" onClick = {this.showNext}>Next</button>

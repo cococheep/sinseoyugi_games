@@ -2,7 +2,8 @@ import React from 'react';
 import {HashRouter, Route} from 'react-router-dom';
 import Navigation from './Navigation';
 import Home from './routes/Home';
-import Unicode from './routes/Unicode';
+import MovieList from './routes/comp/MovieList';
+
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
       <HashRouter>
         <Navigation />
         <Route path = "/" exact = {true} component = {Home}/>
-        <Route path = "/Chosung" component = {Unicode}/>
+        <Route path = "/Chosung" component = {MovieList}/>
       </HashRouter>
     </div>
   );
