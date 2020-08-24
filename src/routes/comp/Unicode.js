@@ -28,7 +28,7 @@ class Unicode extends React.Component{
 
         for(let i = 0; i < len; i++){
             let randIndex = Math.floor(Math.random() * (len - i));
-            [order[len - i], order[randIndex]] = [order[randIndex], order[len - i]];
+            [order[len - 1 - i], order[randIndex]] = [order[randIndex], order[len - 1 - i]];
         }
 
         this.setState({
@@ -83,8 +83,6 @@ class Unicode extends React.Component{
     }
 
     render (){
-        console.log(this.state.randomOrder);
-
         return(
             <div>
                 <h1 className = "unicode_title">초성게임: 영화</h1>

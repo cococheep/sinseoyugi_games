@@ -1,5 +1,5 @@
 import React from 'react';
-import Unicode from '../Unicode';
+import Unicode from './comp/Unicode';
 
 class MovieList extends React.Component {
     state = {
