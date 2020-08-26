@@ -13,6 +13,9 @@ class Home extends React.Component{
                 <div>
                     <Link to = '/Proverb'>속담 이어 말하기</Link>
                 </div>
+                <div>
+                    <Link to ='/Saja'>사자성어 이어 말하기</Link>
+                </div>
             </div>
         );
     }
